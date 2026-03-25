@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class OrderController extends Controller
+{
+    public function index(Request $request)
+    {
+        $orders = $request->user()->orders()->with('items')->latest()->paginate(10);
+
+        return view('shop.orders', compact('orders'));
+    }
+}
